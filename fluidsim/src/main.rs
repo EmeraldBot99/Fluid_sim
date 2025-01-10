@@ -51,9 +51,11 @@ impl Grid {
     pub fn update_grid(&mut self){
         for x in &mut self.vel_y{
             for y in x{
-                *y -= 9.81 * (1/60);
+                *y -= 9.81 * (1.0/60.0);
             }
         }
+
+        self.set_boundary_conditions()
         // let test = self.vel_y[50][50];
         // println!("{test}")
     }
@@ -75,7 +77,7 @@ fn main() {
         panic!("{}", e);
     });
 
-    let mut grid = Grid::new(WIDTH+1, HEIGHT+1);
+    let mut grid = Grid::new(WIDTH, HEIGHT);
 
     // Limit to max ~60 fps update rate
     window.set_target_fps(60);
